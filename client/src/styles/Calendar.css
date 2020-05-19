@@ -1,0 +1,58 @@
+.container {
+  display:flex;
+  flex-direction: row;
+  align-items: stretch;
+  position: relative;
+  margin:0px 0px 20px 0px;
+  height:200px;
+  justify-content: center;
+}
+
+.month_date {
+  width:44%
+}
+
+.line{
+  width:1px;
+  background-color:rgb(226, 226, 226);
+}
+
+.leftarrow{
+  width: 2%;
+  align-self: flex-start;
+  text-align: end;
+  border-radius: 50%;
+  padding:2px;
+  border:none;
+  color: #078171;
+  cursor: pointer;
+}
+
+.rightarrow{
+  width: 2%;
+  align-self: flex-start;
+  text-align: start;
+  border-radius: 50%;
+  border:none;
+  color: #078171;
+  cursor: pointer;
+  padding:2px;
+}
+
+.arrowR{
+  border: solid #078171;;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+  transform: rotate(-45deg);
+  position: relative;
+}
+
+.arrowL{
+  border: solid #078171;;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+  transform: rotate(135deg);
+  position: relative;
+}

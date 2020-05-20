@@ -9,16 +9,16 @@ router.get('/:id/calendar', getPrice);
 // REST API for trips
 
 // create
-router.post('/trips/', postTrip);
+router.post('/trips', postTrip);
 
 // read
 router.get('/trips', getTrips);
 router.get('/trips/:id', getTrip);
 
 // update
-router.put('/trips/:id/update', updateTrip);
+router.put('/trips/:id', updateTrip);
 
 // delete
-router.delete('/trips/:id/delete', deleteTrip);
+router.delete('/trips/:id', deleteTrip);
 
 module.exports = router;

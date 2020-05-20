@@ -1,10 +1,3 @@
-# CRUD API
-
-## create
-```
-router.post('/trips', postTrip);
-```
-use case: HTTP POST http://{url}/trips
 ## Server API
 
 ### Get trip info

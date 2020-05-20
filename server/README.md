@@ -1,12 +1,12 @@
 # CRUD API
 
-create
+## create
 ```
 router.post('/trips/', postTrip);
 ```
 use case: HTTP POST http://{url}/trips
 
-read
+## read
 ```
 router.get('/trips', getTrips);
 router.get('/trips/:id', getTrip);
@@ -14,13 +14,13 @@ router.get('/trips/:id', getTrip);
 use case 1: HTTP GET http://{url}/trips
 use case 2: HTTP GET http://{url}/trips/{id}
 
-update
+## update
 ```
 router.put('/trips/:id', updateTrip);
 ```
 use case: HTTP PUT http://{url}/trips/{id}
 
-delete
+## delete
 ```
 router.delete('/trips/:id', deleteTrip);
 ```

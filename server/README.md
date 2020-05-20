@@ -12,6 +12,7 @@ router.get('/trips', getTrips);
 router.get('/trips/:id', getTrip);
 ```
 use case 1: HTTP GET http://{url}/trips
+
 use case 2: HTTP GET http://{url}/trips/{id}
 
 ## update

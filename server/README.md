@@ -2,7 +2,7 @@
 
 ## create
 ```
-router.post('/trips/', postTrip);
+router.post('/trips', postTrip);
 ```
 use case: HTTP POST http://{url}/trips
 

@@ -13,16 +13,23 @@
 ```json
     {
       "id": "Number",
-      "name": "String",
-      "detail": "String",
+      "tripName": "String",
+      "available": "Boolean",
+      "overview": "String",
+      "mobileTicket": "Boolean",
+      "mayCancel": "Boolean",
+      "instantConfirm": "Boolean",
+      "languages": "String",
+      "recommend": "Number",
+      "departureLocation": "String",
+      "returnLocation": "String",
+      "includes": "String",
+      "excludes": "String",
       "duration": "Number",
-      "cancelation": "Boolean",
-      "totalBooked": "Number",
-      "price": "Number"
     }
 ```
 
-### Add restaurant
+### Add trip
   * POST `/api/trips`
 
 **Success Status Code:** `201`
@@ -31,16 +38,24 @@
 
 ```json
     {
-      "name": "String",
-      "detail": "String",
+      "tripName": "String",
+      "available": "Boolean",
+      "overview": "String",
+      "mobileTicket": "Boolean",
+      "mayCancel": "Boolean",
+      "instantConfirm": "Boolean",
+      "languages": "String",
+      "recommend": "Number",
+      "departureLocation": "String",
+      "returnLocation": "String",
+      "includes": "String",
+      "excludes": "String",
       "duration": "Number",
-      "cancelation": "Boolean",
-      "totalBooked": "Number",
     }
 ```
 
 
-### Update restaurant info
+### Update trip info
   * PATCH `/api/trips/:id`
 
 **Path Parameters:**
@@ -52,16 +67,100 @@
 
 ```json
     {
-      "name": "String",
-      "detail": "String",
+      "tripName": "String",
+      "available": "Boolean",
+      "overview": "String",
+      "mobileTicket": "Boolean",
+      "mayCancel": "Boolean",
+      "instantConfirm": "Boolean",
+      "languages": "String",
+      "recommend": "Number",
+      "departureLocation": "String",
+      "returnLocation": "String",
+      "includes": "String",
+      "excludes": "String",
       "duration": "Number",
-      "cancelation": "Boolean",
-      "totalBooked": "Number",
     }
 ```
 
-### Delete restaurant
+### Delete trip
   * DELETE `/api/trips/:id`
+
+**Path Parameters:**
+  * `id` trip id
+
+**Success Status Code:** `204`
+
+### Get packages info
+  * GET `/api/packagesByTripId/:id`
+
+**Path Parameters:**
+  * `id` trip id
+
+**Success Status Code:** `200`
+
+**Returns:** JSON
+
+```json
+    [{
+      "packageId": "String",
+      "tripId": "String",
+      "tripDate": "String",
+      "duration": "Number",
+      "recommend": "Number",
+      "cancellation": "String",
+      "priceAdult": "Number",
+      "priceYouth": "Number",
+      "priceChild": "Number",
+    }]
+```
+
+### Add package
+  * POST `/api/packages`
+
+**Success Status Code:** `201`
+
+**Request Body**: Expects JSON with the following keys.
+
+```json
+    {
+      "tripId": "String",
+      "tripDate": "String",
+      "duration": "Number",
+      "recommend": "Number",
+      "cancellation": "String",
+      "priceAdult": "Number",
+      "priceYouth": "Number",
+      "priceChild": "Number",
+    }
+```
+
+
+### Update package info
+  * PATCH `/api/packagesByPackageId/:id`
+
+**Path Parameters:**
+  * `id` trip id
+
+**Success Status Code:** `204`
+
+**Request Body**: Expects JSON with any of the following keys (include only keys to be updated)
+
+```json
+    {
+      "tripId": "String",
+      "tripDate": "String",
+      "duration": "Number",
+      "recommend": "Number",
+      "cancellation": "String",
+      "priceAdult": "Number",
+      "priceYouth": "Number",
+      "priceChild": "Number",
+    }
+```
+
+### Delete package
+  * DELETE `/api/packagesByPackageId/:id`
 
 **Path Parameters:**
   * `id` trip id

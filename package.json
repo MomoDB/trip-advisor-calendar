@@ -11,7 +11,9 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage --colors",
     "seed": "mysql -u root -p <db/schema.sql && node db/dbseed",
-    "build-docker": "bash buildDocker.bash"
+    "build-docker": "bash buildDocker.bash",
+    "cassandra:seed": "db/build-cassandra.sh",
+    "postgres:seed": "db/build-postgres.sh"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,9 +22,11 @@
     "bluebird": "^3.7.2",
     "cors": "^2.8.5",
     "css-loader": "^3.5.3",
+    "csv-write-stream": "^2.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
+    "fast-csv": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.5.2",
     "jsdom": "^16.2.2",

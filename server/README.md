@@ -106,6 +106,7 @@
       "packageId": "String",
       "tripId": "String",
       "tripDate": "String",
+      "description": "String",
       "duration": "Number",
       "recommend": "Number",
       "cancellation": "String",
@@ -126,6 +127,7 @@
     {
       "tripId": "String",
       "tripDate": "String",
+      "description": "String",
       "duration": "Number",
       "recommend": "Number",
       "cancellation": "String",
@@ -150,6 +152,7 @@
     {
       "tripId": "String",
       "tripDate": "String",
+      "description": "String",
       "duration": "Number",
       "recommend": "Number",
       "cancellation": "String",

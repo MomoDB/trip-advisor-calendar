@@ -12,7 +12,6 @@ router.get('/:id/calendar', getPrice);
 router.post('/trips', postTrip);
 
 // read
-router.get('/trips', getTrips);
 router.get('/trips/:id', getTrip);
 
 // update

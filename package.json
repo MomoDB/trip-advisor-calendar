@@ -38,6 +38,7 @@
     "react-dom": "^16.13.1",
     "style-loader": "^1.2.1",
     "underscore": "^1.10.2",
+    "uuid": "^8.1.0",
     "webpack": "^4.43.0"
   },
   "devDependencies": {

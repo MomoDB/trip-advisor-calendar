@@ -1,1 +1,1 @@
-COPY calendar.packages FROM 'db/package9.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+COPY calendar.packages (package_id, trip_id, trip_date, package_desc, duration, recommend, cancellation, price_adult, price_youth, price_child) FROM 'db/package9.csv' WITH DELIMITER=',' AND HEADER=TRUE;

@@ -4,14 +4,16 @@ WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
 USE calendar;
 
 --to query for packages
+DROP TABLE IF EXISTS calendar.packages;
+
 CREATE TABLE calendar.packages (
   package_id uuid,
   trip_id uuid,
-  trip_date date,
+  trip_date timestamp,
   package_desc text,
   duration decimal,
   recommend tinyint,
-  cancellation date,
+  cancellation timestamp,
   price_adult smallint,
   price_youth smallint,
   price_child smallint,
@@ -19,6 +21,8 @@ CREATE TABLE calendar.packages (
 ) WITH CLUSTERING ORDER BY (trip_id ASC, trip_date ASC);
 
 --to query for trips
+DROP TABLE IF EXISTS calendar.trips;
+
 CREATE TABLE calendar.trips (
   trip_id uuid,
   name text,

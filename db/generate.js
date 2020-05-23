@@ -1,7 +1,17 @@
 const fs = require('fs');
 const fastcsv = require('fast-csv');
+const { v1: uuidv1 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
-const randomDate = [new Date(2020, 2, 5), new Date(2020, 3, 17), new Date(2020, 0, 1)];
+const d1 = new Date(2020, 2, 5);
+const d2 = new Date(2020, 3, 17);
+const d3 = new Date(2020, 0, 1)
+
+const randomDate = [
+  `${d1.getUTCFullYear()}-${(d1.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d1.getUTCDay() + 1).toString().padStart(2, 0)} ${d1.getUTCHours().toString().padStart(2, 0)}:${d1.getUTCMinutes().toString().padStart(2, 0)}:${d1.getUTCSeconds().toString().padStart(2, 0)}+0000`,
+  `${d2.getUTCFullYear()}-${(d2.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d2.getUTCDay() + 1).toString().padStart(2, 0)} ${d2.getUTCHours().toString().padStart(2, 0)}:${d2.getUTCMinutes().toString().padStart(2, 0)}:${d2.getUTCSeconds().toString().padStart(2, 0)}+0000`,
+  `${d3.getUTCFullYear()}-${(d3.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d3.getUTCDay() + 1).toString().padStart(2, 0)} ${d3.getUTCHours().toString().padStart(2, 0)}:${d3.getUTCMinutes().toString().padStart(2, 0)}:${d3.getUTCSeconds().toString().padStart(2, 0)}+0000`,
+];
 
 const randomPrice = [150, 200, 75];
 
@@ -29,31 +39,32 @@ const randomBool = [true, false, true];
 
 const makePackage = (id, index) => {
   return {
-    price: randomPrice[index],
-    tripId: id,
-    tripDate: randomDate[index],
-    packageDesc: randomDesc[index],
+    'package_id': uuidv1(),
+    'trip_id': id,
+    'trip_date': randomDate[index],
+    'package_desc': randomDesc[index],
     duration: randomDuration[index],
     recommend: randomRec[index],
     cancellation: randomDate[index],
-    priceAdult: randomPrice[index],
-    priceYouth: randomPrice[(index + 1) % 3],
-    priceChild: randomPrice[(index + 2) % 3],
+    'price_adult': randomPrice[index],
+    'price_youth': randomPrice[(index + 1) % 3],
+    'price_child': randomPrice[(index + 2) % 3],
  };
 };
 
-const makeTrip = (index) => {
+const makeTrip = (id, index) => {
   return {
-    tripName: randomName[index],
+    'trip_id': id,
+    name: randomName[index],
     available: randomBool[index],
     overview: randomOverview[index],
-    mobileTicket: randomBool[index],
-    mayCancel: randomBool[index],
-    instantConfirm: randomBool[index],
+    'mobile_ticket': randomBool[index],
+    'may_cancel': randomBool[index],
+    'instant_confirm': randomBool[index],
     languages: randomLang[index],
     recommend: randomRec[index],
-    departureLocation: randomLocation[index],
-    returnLocation: randomLocation[index],
+    'departure_;ocation': randomLocation[index],
+    'return_location': randomLocation[index],
     includes: randomInclude[index],
     excludes: randomExclude[index],
     duration: randomDuration[index],
@@ -68,11 +79,11 @@ const generate = (count, chunk) => {
 
     for (let i = 0; i < parseInt(count / chunk); i++) {
       const currentTrip = j * parseInt(count / chunk) + i + 1;
-
-      trips.push(makeTrip(i % 3));
-      packages.push(makePackage(currentTrip, i % 3));
-      packages.push(makePackage(currentTrip, (i + 1) % 3));
-      packages.push(makePackage(currentTrip, (i +1) % 3));
+      const newUUID = uuidv4();
+      trips.push(makeTrip(newUUID, i % 3));
+      packages.push(makePackage(newUUID, i % 3));
+      packages.push(makePackage(newUUID, (i + 1) % 3));
+      packages.push(makePackage(newUUID, (i +1) % 3));
     }
 
     const tripWS = fs.createWriteStream(`db/trip${j}.csv`);

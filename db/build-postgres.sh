@@ -1,11 +1,16 @@
 db/load-csv.sh
 
-psql calendar > postgres.sql
+psql -d calendar -a -f db/postgres.sql
 
 for i in {0..9}
 do
-  psql calendar > COPY trips FROM 'db/trip'${i}'.csv' DELIMITER=',' CSV HEADER
-  psql calendar > COPY packages FROM 'db/package'${i}'.csv' DELIMITER=',' CSV HEADER
+  echo "COPY trips FROM 'db/trip"${i}".csv' DELIMITER=',' CSV HEADER;" > db/postgresQueries.sql
+
+  psql -d calendar -a -f db/postgresQueries.sql
+
+  echo "COPY packages FROM 'db/package"${i}".csv' DELIMITER=',' CSV HEADER;" > db/postgresQueries.sql
+
+  psql -d calendar -a -f db/postgresQueries.sql
 done
 
-psql calendar > pgconstraints.sql
+psql -d calendar -a -f db/pgconstraints.sql

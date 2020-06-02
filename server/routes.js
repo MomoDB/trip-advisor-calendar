@@ -6,6 +6,8 @@ const router = express.Router();
 router.get('/:id/price', getTripData); //same as getPrice but does some additional parsing after pulling from db
 router.get('/:id/calendar', getPrice);
 
+router.get('/api/calendar', getPrice);
+
 // REST API for trips
 
 // create

@@ -9,9 +9,9 @@ const d2 = new Date(2020, 3, 17);
 const d3 = new Date(2020, 0, 1)
 
 const randomDate = [
-  `${d1.getUTCFullYear()}-${(d1.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d1.getUTCDay() + 1).toString().padStart(2, 0)} ${d1.getUTCHours().toString().padStart(2, 0)}:${d1.getUTCMinutes().toString().padStart(2, 0)}:${d1.getUTCSeconds().toString().padStart(2, 0)}+0000`,
-  `${d2.getUTCFullYear()}-${(d2.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d2.getUTCDay() + 1).toString().padStart(2, 0)} ${d2.getUTCHours().toString().padStart(2, 0)}:${d2.getUTCMinutes().toString().padStart(2, 0)}:${d2.getUTCSeconds().toString().padStart(2, 0)}+0000`,
-  `${d3.getUTCFullYear()}-${(d3.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d3.getUTCDay() + 1).toString().padStart(2, 0)} ${d3.getUTCHours().toString().padStart(2, 0)}:${d3.getUTCMinutes().toString().padStart(2, 0)}:${d3.getUTCSeconds().toString().padStart(2, 0)}+0000`,
+  `${d1.getUTCFullYear()}-${(d1.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d1.getUTCDay() + 1).toString().padStart(2, 0)} ${d1.getUTCHours().toString().padStart(2, 0)}:${d1.getUTCMinutes().toString().padStart(2, 0)}:${d1.getUTCSeconds().toString().padStart(2, 0)}`,
+  `${d2.getUTCFullYear()}-${(d2.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d2.getUTCDay() + 1).toString().padStart(2, 0)} ${d2.getUTCHours().toString().padStart(2, 0)}:${d2.getUTCMinutes().toString().padStart(2, 0)}:${d2.getUTCSeconds().toString().padStart(2, 0)}`,
+  `${d3.getUTCFullYear()}-${(d3.getUTCMonth() + 1).toString().padStart(2, 0)}-${(d3.getUTCDay() + 1).toString().padStart(2, 0)} ${d3.getUTCHours().toString().padStart(2, 0)}:${d3.getUTCMinutes().toString().padStart(2, 0)}:${d3.getUTCSeconds().toString().padStart(2, 0)}`,
 ];
 
 const randomPrice = [150, 200, 75];
@@ -40,7 +40,7 @@ const randomBool = [true, false, true];
 
 const makePackage = (id, index) => {
   return {
-    'package_id': uuidv1(),
+    'package_uuid': uuidv1(),
     'trip_id': id,
     'trip_date': randomDate[index],
     'package_desc': randomDesc[index],
@@ -55,8 +55,8 @@ const makePackage = (id, index) => {
 
 const makeTrip = (id, index) => {
   return {
-    'trip_id': id,
-    name: randomName[index],
+    'trip_uuid': id,
+    'trip_name': randomName[index],
     available: randomBool[index],
     overview: randomOverview[index],
     'mobile_ticket': randomBool[index],
@@ -116,35 +116,6 @@ const generate = (count, chunk) => {
   console.log('finished generating csv');
 };
 
-const cassandraChunker = (count, file) => {
-  const trips = [];
-  const packages = [];
-
-  for (let i = 0; i < count; i++) {
-    const newUUID = uuidv4();
-    trips.push(makeTrip(newUUID, i % 3));
-    packages.push(makePackage(newUUID, i % 3));
-    packages.push(makePackage(newUUID, (i + 1) % 3));
-    packages.push(makePackage(newUUID, (i +1) % 3));
-  }
-
-  const tripWriter = csvWriter();
-  tripWriter.pipe(fs.createWriteStream(`db/trip${file}.csv`));
-  for (let trip of trips) {
-    tripWriter.write(trip);
-  }
-  tripWriter.end();
-
-  const packageWriter = csvWriter();
-  packageWriter.pipe(fs.createWriteStream(`db/package${file}.csv`));
-  for (let package of packages) {
-    packageWriter.write(package);
-  }
-  packageWriter.end();
-
-  console.log(`finished generating csvs for file ${file}`);
-};
-
 const postgresChunker = (count, file) => {
   //trips and packagse have different shape than cassandra
   const trips = [];
@@ -175,7 +146,4 @@ const postgresChunker = (count, file) => {
   console.log(`finished generating csvs for file ${file}`);
 };
 
-cassandraChunker(1000000, 9);
-
-
-
+postgresChunker(1000000, 9);

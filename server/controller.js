@@ -18,17 +18,28 @@ module.exports = {
     });
   }),
 
+
   getPrice: (req, res) => new Promise((resolve, reject) => {
-    const { adults, startdate } = req.query;
-    const tripId = req.params.id;
-    model.fetchTripData(startdate, tripId, adults, (err, results) => {
+    model.fetchSample((err, results) => {
       if (err) {
         resolve(res.status(500).end());
       } else {
         resolve(res.json(results));
       }
-    });
+    })
   }),
+
+  // getPrice: (req, res) => new Promise((resolve, reject) => {
+  //   const { adults, startdate } = req.query;
+  //   const tripId = req.params.id;
+  //   model.fetchTripData(startdate, tripId, adults, (err, results) => {
+  //     if (err) {
+  //       resolve(res.status(500).end());
+  //     } else {
+  //       resolve(res.json(results));
+  //     }
+  //   });
+  // }),
 
   postTrip: () => new Promise((resolve, reject) => {
     const trip = req.body.data;

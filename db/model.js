@@ -1,7 +1,19 @@
 const DB = require('./index.js');
+const pg = require('./pgindex.js');
 // DB is promisified in db index.js file, use async await to get query data
 
 module.exports = {
+  fetchSample: async (callback) => {
+    try {
+      const id = '7eff984d-765b-48eb-8fe0-5d27740193c1'
+      const psql = `select * from trips limit 1;`;
+      const results = await pg.one(psql);
+      callback(null, results);
+    } catch (err) {
+      callback(err);
+    }
+  },
+
   fetchTripData: async (date, tripId, adults, callback) => {
     try {
       const sql = `select tripname, detail, duration, cancelation, totalbooked, price, trip_availability from trips, prices where trip_date = "${date}" and trips.id = "${tripId}"`;

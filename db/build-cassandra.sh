@@ -1,5 +1,3 @@
-db/load-csv.sh
-
 cqlsh -f db/schema.cql
 
 for i in {0..9}
